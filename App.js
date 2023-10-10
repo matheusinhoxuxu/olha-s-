@@ -1,20 +1,64 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { PaperProvider } from 'react-native-paper';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import CursosStack from './screens/cursos/CursosStack';
+import Professores from './screens/professores/Professores';
+import Disciplinas from './screens/disciplinas/Disciplinas';
+import AlunosStack from './screens/alunos/AlunosStack';
+import DisciplinasStack from './screens/disciplinas/DisciplinasStack';
+import ProfessoresStack from './screens/professores/ProfessoresStack';
+
+
+const Tab = createMaterialBottomTabNavigator();
 
 export default function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+    <PaperProvider>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen
+            name="Cursos"
+            component={CursosStack}
+            options={{
+              tabBarIcon: () => (
+                <MaterialCommunityIcons name="movie" size={26} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="disciplinas"
+            component={DisciplinasStack}
+            options={{
+              tabBarIcon: () => (
+                <MaterialCommunityIcons name="alpha-d-box" size={26} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="professores"
+            component={ProfessoresStack}
+            options={{
+              tabBarIcon: () => (
+                <MaterialCommunityIcons name="account-box" size={26} />
+              ),
+            }}
+          />
+          <Tab.Screen
+            name="alunos"
+            component={AlunosStack}
+            options={{
+              tabBarIcon: () => (
+                <MaterialCommunityIcons name="account-multiple-outline" size={26} />
+              ),
+            }}
+          />
+          
+        </Tab.Navigator>
+      </NavigationContainer>
+    </PaperProvider>
+  </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
